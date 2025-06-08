@@ -1,0 +1,54 @@
+name: Build Dist
+on:
+  push:
+    tags:
+      - 'v*'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+          # cache: pip
+      - name: Build Dist
+        run: |
+          python build.py
+      - name: Upload Dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: main.dist.js
+          path: main.dist.js
+      - name: Release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: main.dist.js
+          asset_name: main.dist.js
+          asset_content_type: text/plain
