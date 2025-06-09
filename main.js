@@ -12,29 +12,57 @@
 (function () {
   'use strict';
 
+  function b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  }
+
   const blockedChannelsList = new Set();
+  const sensitiveWordsList = new Set();
+  for (const word of structuredClone(sensitiveWordsList)) {
+    sensitiveWordsList.delete(word);
+    sensitiveWordsList.add(b64DecodeUnicode(word));
+  }
 
   function blockRecommendedContent() {
     // 1. 处理视频页侧栏推荐 (compact-video-renderer)
     const sidebarItems = document.querySelectorAll('ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer');
-    processItems(sidebarItems, 'yt-formatted-string');
+    processItems(sidebarItems, 'yt-formatted-string', 'span#video-title');
 
     // 2. 处理首页推荐 (rich-item-renderer)
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer');
-    processItems(homepageItems, 'yt-formatted-string');
+    processItems(homepageItems, 'yt-formatted-string', 'yt-formatted-string#video-title');
   }
 
-  function processItems(items, authorSelector) {
+  function processItems(items, authorSelector, titleSelector) {
     items.forEach(item => {
+      if (item.title == 'Block!') return;
       const authorElements = item.querySelectorAll(authorSelector);
       let shouldBlock = false;
       authorElements.forEach(el => {
+        if (shouldBlock) return;
         const text = el.textContent.trim();
         if (blockedChannelsList.has(text)) {
           shouldBlock = true;
-          console.log(`屏蔽匹配项: ${text}`);
+          console.log(`屏蔽匹配项(频道): ${text}`);
         }
       });
+
+      if (!shouldBlock) {
+        const titleElement = item.querySelector(titleSelector);
+        if (titleElement) {
+          const titleText = titleElement.textContent.trim();
+          for (const word of sensitiveWordsList) {
+            if (titleText.includes(word)) {
+              shouldBlock = true;
+              console.log(`屏蔽匹配项(标题): ${word} - ${titleText}`);
+              break;
+            }
+          }
+        }
+      }
 
       if (shouldBlock) {
         item.style.opacity = '0';
