@@ -1,10 +1,10 @@
 import re
 
 with open('channels_hashed_list.txt') as f:
-  channels_list = list(set(f.read().strip().split('\n')))
+  channels_list = sorted(list(set(f.read().strip().split('\n'))))
 
 with open('sensitive_words_encoded_list.txt') as f:
-  sensitive_words_list = list(set(f.read().strip().split('\n')))
+  sensitive_words_list = sorted(list(set(f.read().strip().split('\n'))))
 
 with open('main.js') as f:
   main_js = f.read()
