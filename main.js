@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name         屏蔽 YouTube 推荐的中文垃圾视频
+// @name         YouTube 别给我屎
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  屏蔽 YouTube 推荐的中文垃圾视频
 // @match        https://www.youtube.com/
 // @match        https://www.youtube.com/watch*
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
+// @require      https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js
 // ==/UserScript==
 
 (function () {
@@ -44,7 +45,7 @@
       authorElements.forEach(el => {
         if (shouldBlock) return;
         const text = el.textContent.trim();
-        if (blockedChannelsList.has(text)) {
+        if (blockedChannelsList.has(md5(text))) {
           shouldBlock = true;
           console.log(`屏蔽匹配项(频道): ${text}`);
         }

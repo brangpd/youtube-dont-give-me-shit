@@ -1,6 +1,6 @@
 import re
 
-with open('channels_list.txt') as f:
+with open('channels_hashed_list.txt') as f:
   channels_list = list(set(f.read().strip().split('\n')))
 
 with open('sensitive_words_encoded_list.txt') as f:
