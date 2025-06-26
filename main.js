@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         YouTube 别给我屎
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @description  屏蔽 YouTube 推荐的中文垃圾视频
 // @match        https://www.youtube.com/
 // @match        https://www.youtube.com/watch*
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js
+// @updateURL    https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.dist.js
 // ==/UserScript==
 
 (function () {

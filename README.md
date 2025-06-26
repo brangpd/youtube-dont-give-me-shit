@@ -1,3 +1,7 @@
+# YouTube 别给我屎
+
+最新版本链接：[main.dist.js](https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.dist.js)
+
 众所周知 YouTube 如果知道你是简中用户，就会不停地把各种史喂过来，挺恶心的，这个脚本用于屏蔽这些史。
 
 `sensitive_words_encoded_list.txt` 提供了一个超轻量级的专门针对 YouTube 推送的反华内容的敏感词表（已用 base64 打码），一旦标题匹配直接完全屏蔽。
