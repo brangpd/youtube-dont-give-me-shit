@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube 别给我屎
 // @namespace    http://tampermonkey.net/
-// @version      0.2.3
+// @version      0.0
 // @description  屏蔽 YouTube 推荐的中文垃圾视频
 // @author       Brang Pakdring
 // @match        https://www.youtube.com/
