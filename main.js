@@ -18,8 +18,8 @@
 
   function b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    return decodeURIComponent(atob(str).split('').map(function (c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
   }
 
@@ -37,32 +37,39 @@
 
     // 2. 处理首页推荐 (rich-item-renderer)
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer');
+    // 长视频
     processItems(homepageItems, 'yt-formatted-string', 'yt-formatted-string#video-title');
+    // 短视频
+    processItems(homepageItems, '', 'h3.shortsLockupViewModelHostMetadataTitle.shortsLockupViewModelHostOutsideMetadataTitle');
   }
 
   function processItems(items, authorSelector, titleSelector) {
     items.forEach(item => {
       if (item.title == 'Block!') return;
-      const authorElements = item.querySelectorAll(authorSelector);
       let shouldBlock = false;
-      authorElements.forEach(el => {
-        if (shouldBlock) return;
-        const text = el.textContent.trim();
-        if (blockedChannelsList.has(md5(text))) {
-          shouldBlock = true;
-          console.log(`屏蔽匹配项(频道): ${text}`);
-        }
-      });
+      if (authorSelector) {
+        const authorElements = item.querySelectorAll(authorSelector);
+        authorElements.forEach(el => {
+          if (shouldBlock) return;
+          const text = el.textContent.trim();
+          if (blockedChannelsList.has(md5(text))) {
+            shouldBlock = true;
+            console.log(`屏蔽匹配项(频道): ${text}`);
+          }
+        });
+      }
 
-      if (!shouldBlock) {
-        const titleElement = item.querySelector(titleSelector);
-        if (titleElement) {
-          const titleText = titleElement.textContent.trim();
-          for (const word of sensitiveWordsList) {
-            if (titleText.includes(word)) {
-              shouldBlock = true;
-              console.log(`屏蔽匹配项(标题): ${word} - ${titleText}`);
-              break;
+      if (titleSelector) {
+        if (!shouldBlock) {
+          const titleElement = item.querySelector(titleSelector);
+          if (titleElement) {
+            const titleText = titleElement.textContent.trim();
+            for (const word of sensitiveWordsList) {
+              if (titleText.includes(word)) {
+                shouldBlock = true;
+                console.log(`屏蔽匹配项(标题): ${word} - ${titleText}`);
+                break;
+              }
             }
           }
         }
@@ -71,7 +78,7 @@
       if (shouldBlock) {
         item.style.opacity = '0';
         item.style.pointerEvents = 'none';
-        item.style.transition = 'opacity 0.3s ease';
+        item.style.transition = 'opacity 0.05s ease';
         item.title = 'Block!';
 
         // const marker = document.createElement('div');
