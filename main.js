@@ -32,11 +32,11 @@
 
   function blockRecommendedContent() {
     // 1. 处理视频页侧栏推荐 (compact-video-renderer)
-    const sidebarItems = document.querySelectorAll('ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer');
+    const sidebarItems = document.querySelectorAll('ytd-watch-next-secondary-results-renderer:not(.ytdgms-processed) ytd-compact-video-renderer');
     processItems(sidebarItems, 'yt-formatted-string', 'span#video-title');
 
     // 2. 处理首页推荐 (rich-item-renderer)
-    const homepageItems = document.querySelectorAll('ytd-rich-item-renderer');
+    const homepageItems = document.querySelectorAll('ytd-rich-item-renderer:not(.ytdgms-processed)');
     // 长视频
     processItems(homepageItems, 'yt-formatted-string', 'yt-formatted-string#video-title');
     // 短视频
@@ -45,7 +45,8 @@
 
   function processItems(items, authorSelector, titleSelector) {
     items.forEach(item => {
-      if (item.title == 'Block!') return;
+      item.classList.add('ytdgms-processed');
+
       let shouldBlock = false;
       if (authorSelector) {
         const authorElements = item.querySelectorAll(authorSelector);
@@ -76,10 +77,11 @@
       }
 
       if (shouldBlock) {
-        item.style.opacity = '0';
-        item.style.pointerEvents = 'none';
-        item.style.transition = 'opacity 0.05s ease';
-        item.title = 'Block!';
+        item.style.display = 'none';
+        // item.style.opacity = '0';
+        // item.style.pointerEvents = 'none';
+        // item.style.transition = 'opacity 0.05s ease';
+        // item.title = 'Block!';
 
         // const marker = document.createElement('div');
         // marker.textContent = 'Block!';
