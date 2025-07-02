@@ -9,8 +9,8 @@
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js
-// @updateURL    https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.dist.js
-// @downloadURL  https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.dist.js
+// @updateURL    https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.user.js
+// @downloadURL  https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.user.js
 // ==/UserScript==
 
 (function () {
