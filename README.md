@@ -1,6 +1,6 @@
 # YouTube 别给我屎
 
-最新版本链接：[main.dist.js](https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.dist.js)
+最新版本链接：[main.user.js](https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.user.js)
 
 众所周知 YouTube 如果知道你是简中用户，就会不停地把各种史喂过来，挺恶心的，这个脚本用于屏蔽这些史。
 

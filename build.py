@@ -21,5 +21,5 @@ ver = git_last_tag.split('-')[0].split('v')[-1]
 
 main_js = main_js.replace('// @version      0.0', f'// @version      {ver}')
 
-with open('main.dist.js', 'w') as f:
+with open('main.user.js', 'w') as f:
   f.write(main_js)

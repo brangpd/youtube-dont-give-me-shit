@@ -33,8 +33,8 @@ jobs:
       - name: Upload Dist
         uses: actions/upload-artifact@v4
         with:
-          name: main.dist.js
-          path: main.dist.js
+          name: main.user.js
+          path: main.user.js
       - name: Release
         if: github.ref_type == 'tag'
         uses: actions/create-release@v1
@@ -54,6 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: main.dist.js
-          asset_name: main.dist.js
+          asset_path: main.user.js
+          asset_name: main.user.js
           asset_content_type: text/plain
