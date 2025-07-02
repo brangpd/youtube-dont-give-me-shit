@@ -32,8 +32,8 @@
 
   function blockRecommendedContent() {
     // 1. 处理视频页侧栏推荐 (compact-video-renderer)
-    const sidebarItems = document.querySelectorAll('ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer:not(.ytdgms-processed)');
-    processItems(sidebarItems, 'yt-formatted-string', 'span#video-title');
+    const sidebarItems = document.querySelectorAll('yt-lockup-view-model:not(.ytdgms-processed)');
+    processItems(sidebarItems, 'div.yt-content-metadata-view-model-wiz__metadata-row', 'h3');
 
     // 2. 处理首页推荐 (rich-item-renderer)
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer:not(.ytdgms-processed)');
