@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         YouTube 别给我屎
+// @name         YouTube 铲屎官
 // @namespace    http://tampermonkey.net/
 // @version      0.0
 // @description  屏蔽 YouTube 推荐的中文垃圾视频

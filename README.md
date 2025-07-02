@@ -1,4 +1,4 @@
-# YouTube 别给我屎
+# YouTube 铲屎官
 
 最新版本链接：[main.user.js](https://github.com/brangpd/youtube-dont-give-me-shit/releases/latest/download/main.user.js)
 
