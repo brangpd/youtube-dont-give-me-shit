@@ -43,6 +43,17 @@
     processItems(homepageItems, '', 'h3.shortsLockupViewModelHostMetadataTitle.shortsLockupViewModelHostOutsideMetadataTitle');
   }
 
+  function clearBlock() {
+    const sidebarItems = document.querySelectorAll('ytd-watch-next-secondary-results-renderer ytd-compact-video-renderer.ytdgms-processed')
+    for (const item of sidebarItems) {
+      item.classList.remove('ytdgms-processed');
+    }
+    const homepageItems = document.querySelectorAll('ytd-rich-item-renderer.ytdgms-processed');
+    for (const item of homepageItems) {
+      item.classList.remove('ytdgms-processed');
+    }
+  }
+
   function processItems(items, authorSelector, titleSelector) {
     items.forEach(item => {
       item.classList.add('ytdgms-processed');
@@ -131,6 +142,7 @@
   window.addEventListener('scroll', debounce(blockRecommendedContent, 300), { passive: true });
 
   document.addEventListener('yt-navigate-finish', blockRecommendedContent);
+  document.addEventListener('yt-navigate-start', clearBlock);
 
   setInterval(blockRecommendedContent, 1000);
 })();
