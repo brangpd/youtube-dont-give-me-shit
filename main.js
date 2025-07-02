@@ -4,7 +4,7 @@
 // @version      0.0
 // @description  屏蔽 YouTube 推荐的中文垃圾视频
 // @author       Brang Pakdring
-// @license      AGPL-3.0
+// @license      AGPL-3.0-only
 // @match        https://www.youtube.com/
 // @match        https://www.youtube.com/watch*
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
