@@ -2,7 +2,7 @@
 // @name         YouTube 铲屎官
 // @namespace    http://tampermonkey.net/
 // @version      0.0
-// @description  屏蔽 YouTube 推荐的中文垃圾视频
+// @description  屏蔽 YouTube 主页、视频页推荐的中文垃圾
 // @author       Brang Pakdring
 // @license      AGPL-3.0-only
 // @match        https://www.youtube.com/
@@ -33,8 +33,8 @@
 
   function blockRecommendedContent() {
     // 1. 处理视频页侧栏推荐 (compact-video-renderer)
-    const sidebarItems = document.querySelectorAll('yt-lockup-view-model:not(.ytdgms-processed)');
-    processItems(sidebarItems, 'div.yt-content-metadata-view-model-wiz__metadata-row', 'h3');
+    const sidebarItems = document.querySelectorAll('ytd-compact-video-renderer:not(.ytdgms-processed)');
+    processItems(sidebarItems, 'yt-formatted-string.ytd-channel-name', 'h3');
 
     // 2. 处理首页推荐 (rich-item-renderer)
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer:not(.ytdgms-processed)');
