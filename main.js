@@ -35,6 +35,9 @@
     // 1. 处理视频页侧栏推荐 (compact-video-renderer)
     const sidebarItems = document.querySelectorAll('ytd-compact-video-renderer:not(.ytdgms-processed)');
     processItems(sidebarItems, 'yt-formatted-string.ytd-channel-name', 'h3');
+    // 这两种侧栏会随机出现，机制暂时不明。
+    const sidebarItems2 = document.querySelectorAll('yt-lockup-view-model:not(.ytdgms-processed)');
+    processItems(sidebarItems2, 'div.yt-content-metadata-view-model-wiz__metadata-row', 'a.yt-lockup-metadata-view-model-wiz__title');
 
     // 2. 处理首页推荐 (rich-item-renderer)
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer:not(.ytdgms-processed)');
