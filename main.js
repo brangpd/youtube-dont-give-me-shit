@@ -43,7 +43,7 @@
     const homepageItems = document.querySelectorAll('ytd-rich-item-renderer:not(.ytdgms-processed)');
     // 长视频
     processItems(homepageItems, 'yt-formatted-string', 'yt-formatted-string#video-title');
-    processItems(homepageItems, 'yt-core-attributed-string', '.yt-lockup-metadata-view-model__title');
+    processItems(homepageItems, '.yt-core-attributed-string', '.yt-lockup-metadata-view-model__title');
     // 短视频
     processItems(homepageItems, '', 'h3.shortsLockupViewModelHostMetadataTitle.shortsLockupViewModelHostOutsideMetadataTitle');
   }
